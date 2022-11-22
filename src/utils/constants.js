@@ -1,12 +1,6 @@
 export const ROUTE = {
-    ROOT: {
-        URL: "/",
-        ICON: "home",
-        NAME: "Home",
-        HIDE: false,
-    },
     LOG_IN: {
-        URL: "/log-in",
+        URL: "/",
         ICON: "",
         NAME: "Log In",
         HIDE: true,
@@ -17,10 +11,10 @@ export const ROUTE = {
         NAME: "Register",
         HIDE: true,
     },
-    RESET_PASSWORD: {
-        URL: "/reset-password",
+    FORGET_PASSWORD: {
+        URL: "/forget-password",
         ICON: "",
-        NAME: "reset password",
+        NAME: "forget password",
         HIDE: true,
     },
     HOME: {
