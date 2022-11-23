@@ -5,11 +5,13 @@
 }
 
 .title {
-    padding-left: 15%;
+    padding-left: 10%;
     color: var(--primary-color);
 }
 
 .menu-item {
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: start;
     text-decoration: none;
@@ -22,9 +24,15 @@
         font-weight: 700;
     }
     &:hover {
-        background-color: #2ea4e9b8;
+        background-color: #48aae2b8;
     }
     &:first-child {
-        margin-top: 15%;
+        margin-top: 10%;
     }
+}
+
+.menu-icon {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
 }
