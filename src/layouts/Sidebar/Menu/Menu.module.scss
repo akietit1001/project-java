@@ -1,0 +1,30 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+}
+
+.title {
+    padding-left: 15%;
+    color: var(--primary-color);
+}
+
+.menu-item {
+    width: 100%;
+    text-align: start;
+    text-decoration: none;
+    padding: calc(12px + 5%) 0;
+    margin: 8px 0;
+    border-radius: 12px;
+    &.active {
+        background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        font-weight: 700;
+    }
+    &:hover {
+        background-color: #2ea4e9b8;
+    }
+    &:first-child {
+        margin-top: 15%;
+    }
+}
