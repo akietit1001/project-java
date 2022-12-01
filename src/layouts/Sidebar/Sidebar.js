@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 function Sidebar() {
     return <aside className={cx('wrapper')}>
-    <img src= {images.logo} alt='logo'/>
+    <img src= {images.logo} alt='logo' className={cx('logo')}/>
     <Menu>
         <MenuItem title={"Home"} to={ROUTE.HOME.URL} icon={<HomeIcon sx={{width: '24px', height: '24px', color: '#333', paddingLeft: '8%'}}/>}/>
         <MenuItem title={"Messages"} to={ROUTE.MESSAGES.URL} icon={<MessageIcon sx={{width: '24px', height: '24px', color: '#333', paddingLeft: '8%'}}/>}/>
