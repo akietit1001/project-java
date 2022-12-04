@@ -5,7 +5,7 @@ import { HeartOutlined, HeartFilled, CommentOutlined, ShareAltOutlined  } from '
 import styled from 'styled-components';
 
 const SidebarStyles = styled(Col)`
-    height: 100%;
+    height: 100vh;
     width: 100%;
 `
 
@@ -13,7 +13,7 @@ const ContentStyled = styled(Col)`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 44px;
 `
 
 const PostStyles = styled(Col)`
@@ -33,7 +33,8 @@ const PostStyles = styled(Col)`
 const HeaderPostStyles = styled.div`
 
     .name-author__post{
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: bold;
         &:hover {
             cursor: pointer;
         }
@@ -94,7 +95,7 @@ function Home() {
                             <span className='name-author__post'>Trung Quan</span>
                         </HeaderPostStyles>
                         <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
-                        alt="" style={{width: '500px'}} className='image__post'/>
+                        alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
                                 <span>
@@ -121,7 +122,7 @@ function Home() {
                             <span className='name-author__post'>Trung Quan</span>
                         </HeaderPostStyles>
                         <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
-                        alt="" style={{width: '500px'}} className='image__post'/>
+                        alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span className='btn-love' onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
                                 <span className='btn-comment'>
@@ -148,7 +149,7 @@ function Home() {
                             <span className='name-author__post'>Trung Quan</span>
                         </HeaderPostStyles>
                         <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
-                        alt="" style={{width: '500px'}} className='image__post'/>
+                        alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span className='btn-love' onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
                                 <span className='btn-comment'>

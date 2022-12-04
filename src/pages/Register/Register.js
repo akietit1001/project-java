@@ -19,13 +19,20 @@ const cx = classnames.bind(styles);
 function Register() {
     let navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [occupation, setOccupation] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [account, setAccount] = useState('');
     const [conformPassword, setConformPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
+    const [showPassword1, setShowPassword1] = useState(false);
+    const [showPassword2, setShowPassword2] = useState(false);
+    const handleClickShowPassword1 = () => {
+    setShowPassword1(!showPassword1);
+  };
+  const handleClickShowPassword2 = () => {
+    setShowPassword2(!showPassword2);
   };
   const handledSubmit = () =>{
         // navigate(ROUTE.HOME.URL);
@@ -35,42 +42,84 @@ function Register() {
             <img className={cx('logo')} src = {images.logo} alt='logo'/>
             <div className={cx('form-register')}>
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-password" sx={{fontSize: '14px'}}>Email or Phone Number</InputLabel>
+                <InputLabel htmlFor="filled-adornment-email" sx={{fontSize: '14px'}}>Email</InputLabel>
                 <FilledInput
                     id="filled-adornment-email"
+                    type='email'
+                    required = {true}
                     onChange={(e)=>{
                         setEmail(e.target.value);
                     }}
                     sx={{fontSize: '16px'}}
                 />
-                </FormControl>
-                
-                <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-name" sx={{fontSize: '14px'}}>Full Name</InputLabel>
+            </FormControl>
+
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-first_name" sx={{fontSize: '14px'}}>First Name</InputLabel>
                 <FilledInput
-                    id="filled-adornment-name"
+                    id="filled-adornment-first_name"
+                    required = {true}
                     onChange={(e)=>{
-                        setName(e.target.value);
+                        setFirstName(e.target.value);
                     }}
                     sx={{fontSize: '16px'}}
                 />
-                </FormControl>
+            </FormControl>
                 
-                <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-account" sx={{fontSize: '14px'}}>Account Name</InputLabel>
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-last_name" sx={{fontSize: '14px'}}>Last Name</InputLabel>
                 <FilledInput
-                    id="filled-adornment-account-name"
+                    id="filled-adornment-last_name"
+                    required = {true}
                     onChange={(e)=>{
-                        setAccount(e.target.value);
+                        setLastName(e.target.value);
                     }}
                     sx={{fontSize: '16px'}}
                 />
-                </FormControl>
-                <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+            </FormControl>
+
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-phone" sx={{fontSize: '14px'}}>Phone Number</InputLabel>
+                <FilledInput
+                    id="filled-adornment-phone"
+                    required = {true}
+                    onChange={(e)=>{
+                        setPhone(e.target.value);
+                    }}
+                    sx={{fontSize: '16px'}}
+                />
+            </FormControl>
+                
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-address" sx={{fontSize: '14px'}}>Address</InputLabel>
+                <FilledInput
+                    id="filled-adornment-address"
+                    required = {true}
+                    onChange={(e)=>{
+                        setAddress(e.target.value);
+                    }}
+                    sx={{fontSize: '16px'}}
+                />
+            </FormControl>
+            
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-occupation" sx={{fontSize: '14px'}}>Occupation</InputLabel>
+                <FilledInput
+                    id="filled-adornment-occupation"
+                    required = {true}
+                    onChange={(e)=>{
+                        setOccupation(e.target.value);
+                    }}
+                    sx={{fontSize: '16px'}}
+                />
+            </FormControl>
+
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
                 <InputLabel htmlFor="filled-adornment-password" sx={{fontSize: '14px'}}>Password</InputLabel>
                 <FilledInput
                     id="filled-adornment-password"
-                    type={showPassword ? 'text' : 'password'}
+                    required = {true}
+                    type={showPassword1 ? 'text' : 'password'}
                     onChange={(e)=>{
                         setPassword(e.target.value);
                     }}
@@ -79,27 +128,41 @@ function Register() {
                     <InputAdornment position="end">
                         <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onClick={handleClickShowPassword1}
                         edge="end"
                         >
-                        {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        {showPassword1 ? <VisibilityOffIcon /> : <VisibilityIcon />}
                         </IconButton>
                     </InputAdornment>
                     }
                 />
-                </FormControl>
+            </FormControl>
                 
-                <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
                 <InputLabel htmlFor="filled-adornment-conform_password" sx={{fontSize: '14px'}}>Conform Password</InputLabel>
                 <FilledInput
                     id="filled-adornment-conform_password"
+                    required = {true}
+                    type={showPassword2 ? 'text' : 'password'}
                     onChange={(e)=>{
                         setConformPassword(e.target.value);
                     }}
                     sx={{fontSize: '16px'}}
+                    endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword2}
+                        edge="end"
+                        >
+                        {showPassword2 ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
+                    </InputAdornment>
+                    }
                 />
-                </FormControl>
-                <Button className={cx('btn-register')} variant="contained" sx={{
+            </FormControl>
+
+            <Button className={cx('btn-register')} variant="contained" sx={{
                     borderRadius: '20px',
                     backgroundColor: '#115CCD',
                     width: '80%',
@@ -110,7 +173,8 @@ function Register() {
                 >SIGN UP</Button>
 
                 <span className={cx('options')}>
-                    <Link className={cx('login')} to={ROUTE.LOG_IN.URL}>Login</Link>
+                    <span>I have an account. </span>
+                    <Link className={cx('login')} to={ROUTE.LOG_IN.URL}>Login Now</Link>
                 </span>
             </div>
         </div>
