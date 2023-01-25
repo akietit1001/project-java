@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Sidebar from '../../layouts/Sidebar/Sidebar';
-import { Row, Col, Avatar, Button} from 'antd';
+import { Row, Col, Avatar, Button, Image} from 'antd';
 import { SettingFilled } from '@ant-design/icons'
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const SidebarStyles = styled(Col)`
     height: 100vh;
@@ -9,6 +11,7 @@ const SidebarStyles = styled(Col)`
 const ContentStyles = styled.div`
     padding: 30px 20px 0;
     width: 100%;
+    border-bottom: 1px solid #ccc;
 `
 
 const HeaderProfileStyles = styled(Row)`
@@ -62,6 +65,10 @@ const InfoStyles = styled(Col)`
 `
 
 function Profile() {
+    const [visible, setVisible] = useState(false);
+    const user = useSelector(state=>state.users)
+    const {lastname, firstname, username} = user;
+    const fullname = lastname + ' ' + firstname;
     return <div className='wrapper'>
         <Row>
             <SidebarStyles span={4}>  
@@ -77,7 +84,7 @@ function Profile() {
                         </AvatarStyles>
                         <InfoStyles span={15}>
                             <div className='info-row-1'>
-                                <span className='account-name'>ndakiett.cool</span>
+                                <span className='account-name'>{username}</span>
                                 <Button style={{width: '170px', margin: '0 20px'}}>Edit Profile</Button>
                                 <span className='btn-setting-profile'>
                                     <SettingFilled/>
@@ -89,12 +96,27 @@ function Profile() {
                                 <span className='profile-following'>Following 48 users</span>
                             </div>
                             <div className='full-name'>
-                                Anh Kiet Nguyen Duy
+                                {fullname}
                             </div>
                         </InfoStyles>
                     </HeaderProfileStyles>
 
                 </ContentStyles>
+                <div>
+                    <Image.PreviewGroup preview={{
+                        visible,
+                        onVisibleChange: (vis) => setVisible(vis),
+                    }}>
+                        <Image 
+                            width={293} 
+                            src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
+                        />
+                    </Image.PreviewGroup>
+                </div>
+                    
+                
+                    
+                
             </Col>
         </Row>
     </div>

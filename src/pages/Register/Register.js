@@ -55,9 +55,9 @@ function Register() {
             </FormControl>
 
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-first_name" sx={{fontSize: '14px'}}>First Name</InputLabel>
+                <InputLabel htmlFor="filled-adornment-first-name" sx={{fontSize: '14px'}}>First Name</InputLabel>
                 <FilledInput
-                    id="filled-adornment-first_name"
+                    id="filled-adornment-first-name"
                     required = {true}
                     onChange={(e)=>{
                         setFirstName(e.target.value);
@@ -67,9 +67,9 @@ function Register() {
             </FormControl>
                 
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-last_name" sx={{fontSize: '14px'}}>Last Name</InputLabel>
+                <InputLabel htmlFor="filled-adornment-last-name" sx={{fontSize: '14px'}}>Last Name</InputLabel>
                 <FilledInput
-                    id="filled-adornment-last_name"
+                    id="filled-adornment-last-name"
                     required = {true}
                     onChange={(e)=>{
                         setLastName(e.target.value);

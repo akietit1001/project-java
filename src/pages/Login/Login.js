@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ROUTE } from '../../utils/constants';
 import classnames from 'classnames/bind';
 import styles from './Login.module.scss';
@@ -12,30 +12,70 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import images from '../../assets';
+import userApi from '../../apis/userApi';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/reducers/user';
+import { useLocation } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 
 const cx = classnames.bind(styles);
 
 function Login() {
+    const userStore = useUser() || {}
+    const {isLogged = false} = userStore || {};
+    const location = useLocation();
     let navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handledSubmit = () =>{
-        navigate(ROUTE.HOME.URL);
+        setShowPassword(!showPassword);
+    };
+
+    useEffect(()=>{
+    if (isLogged) {
+      if (location.state?.from) {
+        navigate(location.state.from);
+      } else {
+        navigate("/", { replace: false });
+      }
     }
+    },[isLogged]);
+    
+    const onSubmit = async ()=>{
+        try {
+            const params = {
+                username: username,
+                password: password,
+            }
+            const res = JSON.parse(localStorage.getItem('user'))
+            console.log(res)
+            dispatch(signIn(res))
+            // const response = await userApi.signIn(params);
+            // const token = response?.accessToken;
+            // localStorage.setItem('accessToken', token);
+            // dispatch(signIn(response));
+            navigate(ROUTE.HOME.URL);
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+    
     return <div className={cx('wrapper')}>
         <div className={cx('inner')}>
             <img className={cx('logo')} src = {images.logo} alt='logo'/>
+            {error && (<div className={cx('error-message')}>
+                Error: {error} !!!
+            </div>)}
             <div className={cx('form-login')}>
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
-                <InputLabel htmlFor="filled-adornment-email" sx={{fontSize: '14px'}}>Email or Phone Number</InputLabel>
+                <InputLabel htmlFor="filled-adornment-username" sx={{fontSize: '14px'}}>User Name</InputLabel>
                 <FilledInput
-                    id="filled-adornment-account-name"
+                    id="filled-adornment-username"
                     onChange={(e)=>{
-                        setEmail(e.target.value);
+                        setUsername(e.target.value);
                     }}
                     sx={{fontSize: '16px'}}
                 />
@@ -69,7 +109,7 @@ function Login() {
                     marginTop: '20px',
                     fontSize: '16px'
                 }}
-                onClick={handledSubmit}
+                onClick={onSubmit}
                 >SIGN IN</Button>
 
                 <span className={cx('options')}>

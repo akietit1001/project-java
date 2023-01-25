@@ -3,6 +3,9 @@ import Sidebar from '../../layouts/Sidebar/Sidebar';
 import {Col, Row, Avatar, Input, Button} from 'antd';
 import { HeartOutlined, HeartFilled, CommentOutlined, ShareAltOutlined  } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useUser } from '../../hooks/useUser';
+import store from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 const SidebarStyles = styled(Col)`
     height: 100vh;
@@ -74,11 +77,14 @@ const ActionCommentStyles = styled.div`
 `
 
 function Home() {
+    const userStore = useSelector(state=>state.users)
+    const {lastname, firstname} = userStore || {}
+    const fullname = lastname + " " + firstname;
     const [isLove, setIsLove] = useState(false);
-
     const handleButtonLove = () =>{
         setIsLove(!isLove);
     }
+    // const user = JSON.parse(localStorage.getItem('user'));
     return <div className='wrapper'>
         <Row>
             <SidebarStyles span={4}>  
@@ -88,13 +94,13 @@ function Home() {
                 <PostStyles span={10}>
                     <div className='post'>
                         <HeaderPostStyles className='header__post'>
-                            <Avatar src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/314907587_692028362283327_5721847997252227209_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=afy53mIdQIUAX9HtVv0&tn=4gSakLtlp4fl4wS6&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCTE0P9JT9copVlIgByEfWyRo0bScvr65bfnI_8WW418A&oe=638C3F27"
+                            <Avatar src="https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg"
                                 size={40}
                                 className='avatar'
                             />
-                            <span className='name-author__post'>Trung Quan</span>
+                            <span className='name-author__post'>{fullname}</span>
                         </HeaderPostStyles>
-                        <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" 
                         alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
@@ -115,13 +121,13 @@ function Home() {
                 <PostStyles span={10}>
                     <div className='post'>
                         <HeaderPostStyles className='header__post'>
-                            <Avatar src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/314907587_692028362283327_5721847997252227209_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=afy53mIdQIUAX9HtVv0&tn=4gSakLtlp4fl4wS6&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCTE0P9JT9copVlIgByEfWyRo0bScvr65bfnI_8WW418A&oe=638C3F27"
+                            <Avatar src="https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg"
                                 size={40}
                                 className='avatar'
                             />
-                            <span className='name-author__post'>Trung Quan</span>
+                            <span className='name-author__post'>Severus</span>
                         </HeaderPostStyles>
-                        <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" 
                         alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span className='btn-love' onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
@@ -142,13 +148,13 @@ function Home() {
                 <PostStyles span={10}>
                     <div className='post'>
                         <HeaderPostStyles className='header__post'>
-                            <Avatar src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/314907587_692028362283327_5721847997252227209_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=afy53mIdQIUAX9HtVv0&tn=4gSakLtlp4fl4wS6&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCTE0P9JT9copVlIgByEfWyRo0bScvr65bfnI_8WW418A&oe=638C3F27"
+                            <Avatar src="https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg"
                                 size={40}
                                 className='avatar'
                             />
-                            <span className='name-author__post'>Trung Quan</span>
+                            <span className='name-author__post'>Severus</span>
                         </HeaderPostStyles>
-                        <img src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/317278659_708591080627055_4573666939096240291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=3ld7kwdG7tcAX9q4HWC&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBVcvTa8ND7T05scEnDdzRGShqXWM_tW8-EcUFWhAQ9nw&oe=638DAA07" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" 
                         alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span className='btn-love' onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>

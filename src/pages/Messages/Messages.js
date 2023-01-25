@@ -2,7 +2,8 @@ import Sidebar from '../../layouts/Sidebar/Sidebar';
 import {Avatar, Col, Input, Row} from 'antd';
 import styled from 'styled-components';
 import Message from '../../components/Message';
-import { SendOutlined } from '@ant-design/icons';
+import { ConsoleSqlOutlined, SendOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 const SidebarStyles = styled(Col)`
     height: 100%;
@@ -118,7 +119,11 @@ const TextMessage = styled.div`
 `
 
 function Messages() {
-    
+    // const user = JSON.parse(localStorage.getItem('user'));
+    const user = useSelector(state=> state.users);
+    const {username} = user || {};
+
+    console.log(username)
     return <div className='wrapper'>
         <Row>
             <SidebarStyles span={4}>  
@@ -128,7 +133,7 @@ function Messages() {
                 <WrapperStyles>
                     <ContentStyles>
                         <ListFriendsSTyles span={9}>
-                            <AccountNameStyles className='account-name'>ndakiett.cool</AccountNameStyles>
+                            <AccountNameStyles className='account-name'>{username}</AccountNameStyles>
                             <FriendStyles>
                                 <Avatar src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/314759360_1784100378593353_1317706178968335052_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IRRTZQt96oMAX8VwnQt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfDikpESQO7HFMKyp4P-U9tRIcOBHerU8433MSeqPF1qiA&oe=638D0482" 
                                     size={70}
