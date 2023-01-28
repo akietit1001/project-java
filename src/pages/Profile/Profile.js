@@ -4,6 +4,7 @@ import { Row, Col, Avatar, Button, Image} from 'antd';
 import { SettingFilled } from '@ant-design/icons'
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useUser } from '../../hooks/useUser';
 
 const SidebarStyles = styled(Col)`
     height: 100vh;
@@ -12,6 +13,7 @@ const ContentStyles = styled.div`
     padding: 30px 20px 0;
     width: 100%;
     border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
 `
 
 const HeaderProfileStyles = styled(Row)`
@@ -64,9 +66,14 @@ const InfoStyles = styled(Col)`
     }
 `
 
+const ImageStyles = styled.span`
+    margin: 15px;
+`
+
 function Profile() {
     const [visible, setVisible] = useState(false);
-    const user = useSelector(state=>state.users)
+    // const user = useSelector(state=>state.users)
+    const user = useUser();
     const {lastname, firstname, username} = user;
     const fullname = lastname + ' ' + firstname;
     return <div className='wrapper'>
@@ -78,9 +85,9 @@ function Profile() {
                 <ContentStyles>
                     <HeaderProfileStyles>
                         <AvatarStyles span={9}>
-                            <Avatar src='https://scontent.fsgn13-3.fna.fbcdn.net/v/t39.30808-1/277737199_3028472824071404_6969798517400741706_n.jpg?stp=dst-jpg_p240x240&_nc_cat=102&ccb=1-7&_nc_sid=7206a8&_nc_ohc=aQZbNSv-RscAX-6WLHQ&tn=4gSakLtlp4fl4wS6&_nc_ht=scontent.fsgn13-3.fna&oh=00_AfAK1mSq5CElO4UEnvcK6EzOP1xewG-WEvCX5cGyx-nPiw&oe=6391C824'
+                            <Avatar
                                 size={170}
-                            />
+                            >{firstname[0]}</Avatar>
                         </AvatarStyles>
                         <InfoStyles span={15}>
                             <div className='info-row-1'>
@@ -100,23 +107,43 @@ function Profile() {
                             </div>
                         </InfoStyles>
                     </HeaderProfileStyles>
-
                 </ContentStyles>
-                <div>
+            <ImageStyles>
+                <Image
+                preview={{
+                    visible: false,
+                }}
+                    width={293}
+                    src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
+                    onClick={() => setVisible(true)}
+                />
+                <div
+                    style={{
+                    display: 'none',
+                }}
+                >
                     <Image.PreviewGroup preview={{
                         visible,
                         onVisibleChange: (vis) => setVisible(vis),
                     }}>
-                        <Image 
-                            width={293} 
+                        <Image
+                            src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
+                        />
+                        <Image
+                            src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
+                        />
+                        <Image
                             src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
                         />
                     </Image.PreviewGroup>
-                </div>
-                    
-                
-                    
-                
+                </div>     
+            </ImageStyles>
+            <ImageStyles>
+                <Image
+                    width={293}
+                    src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t39.30808-6/327143839_863202838279190_1120819896134065252_n.jpg?stp=dst-jpg_p843x403&_nc_cat=108&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=8FgT3FszqeIAX-C27Tu&_nc_ht=scontent.fsgn13-3.fna&oh=00_AfCKExTSZyW8zeJq5kj_C6l0ykIHQDYSlaRGspn7Y1fy8Q&oe=63D51D3E"
+                    />
+            </ImageStyles>
             </Col>
         </Row>
     </div>

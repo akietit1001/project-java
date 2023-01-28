@@ -1,4 +1,5 @@
 import './App.css';
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,48 +16,87 @@ import Profile from './pages/Profile/Profile';
 import Messages from './pages/Messages/Messages';
 import Setting from './pages/Setting/Setting';
 import store from './redux/store';
+import { useUser } from './hooks/useUser';
+import { useLocation } from 'react-router-dom';
+import { IntercomProvider, useIntercom } from "react-use-intercom";
+
+function PrivateRoute({ children }) {
+  const userStore = useUser() || {};
+  const {
+    isLogged = false,
+    first_name = "",
+    last_name = "",
+    email = "",
+  } = userStore || {};
+  const location = useLocation();
+  const { update } = useIntercom();
+
+  useEffect(() => {
+    if (isLogged) {
+      update({
+        name: `${first_name} ${last_name}`,
+        email: email || "",
+      });
+    }
+  }, [isLogged]);
+
+  return children
+} 
+
 function App() {
   return (
-        <Provider store = {store}>
-          <Router>
-              <div className="App">
-                <Routes>
-                  <Route
-                    path={ROUTE.LOG_IN.URL}
-                    element = {<Login />}
-                  />
-                  <Route
-                    path={ROUTE.REGISTER.URL}
-                    element = {<Register />}
-                  />
-                  <Route
-                    path={ROUTE.FORGET_PASSWORD.URL}
-                    element={<ForgetPassword />}
-                  />
-                  <Route
-                    path={ROUTE.HOME.URL}
-                    element={<Home />}
-                  />
-                  <Route
-                    path={ROUTE.MESSAGES.URL}
-                    element={<Messages />}
-                  />
-                  <Route
-                    path={ROUTE.NOTIFY.URL}
-                    element={<Notification />}
-                  />
-                  <Route
-                    path={ROUTE.PROFILE.URL}
-                    element={<Profile />}
-                  />
-                  <Route
-                    path={ROUTE.SETTING.URL}
-                    element={<Setting />}
-                  />
-                </Routes>
-              </div>
-            </Router>
-        </Provider>
+        <IntercomProvider appId={process.env.INTERCOM_APP_ID} autoBoot>
+          <Provider store = {store}>
+            <Router>
+                <div className="App">
+                  <Routes>
+                    <Route
+                      path={ROUTE.LOG_IN.URL}
+                      element = {<Login />}
+                    />
+                    <Route
+                      path={ROUTE.REGISTER.URL}
+                      element = {<Register />}
+                    />
+                    <Route
+                      path={ROUTE.FORGET_PASSWORD.URL}
+                      element={<ForgetPassword />}
+                    />
+                    <Route
+                      path={ROUTE.HOME.URL}
+                      element={<PrivateRoute>
+                        <Home />
+                      </PrivateRoute>}
+                    />
+                    <Route
+                      path={ROUTE.MESSAGES.URL}
+                      element={<PrivateRoute>
+                        <Messages />
+                      </PrivateRoute>}
+                    />
+                    <Route
+                      path={ROUTE.NOTIFY.URL}
+                      element={<PrivateRoute>
+                        <Notification />
+                      </PrivateRoute>}
+                    />
+                    <Route
+                      path={ROUTE.PROFILE.URL}
+                      element={<PrivateRoute>
+                        <Profile />
+                      </PrivateRoute>}
+                    />
+                    <Route
+                      path={ROUTE.SETTING.URL}
+                      element={<PrivateRoute>
+                        <Setting />
+                      </PrivateRoute>}
+                    />
+                  </Routes>
+                </div>
+              </Router>
+          </Provider>
+        </IntercomProvider>
   );
 }
 

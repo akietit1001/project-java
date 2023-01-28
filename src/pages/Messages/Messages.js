@@ -2,8 +2,9 @@ import Sidebar from '../../layouts/Sidebar/Sidebar';
 import {Avatar, Col, Input, Row} from 'antd';
 import styled from 'styled-components';
 import Message from '../../components/Message';
-import { ConsoleSqlOutlined, SendOutlined } from '@ant-design/icons';
+import { SendOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import { useUser } from '../../hooks/useUser';
 
 const SidebarStyles = styled(Col)`
     height: 100%;
@@ -120,10 +121,11 @@ const TextMessage = styled.div`
 
 function Messages() {
     // const user = JSON.parse(localStorage.getItem('user'));
-    const user = useSelector(state=> state.users);
+    // const user = useSelector(state=> state.users);
+    const user = useUser();
     const {username} = user || {};
 
-    console.log(username)
+    // console.log(username)
     return <div className='wrapper'>
         <Row>
             <SidebarStyles span={4}>  
@@ -135,20 +137,20 @@ function Messages() {
                         <ListFriendsSTyles span={9}>
                             <AccountNameStyles className='account-name'>{username}</AccountNameStyles>
                             <FriendStyles>
-                                <Avatar src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/314759360_1784100378593353_1317706178968335052_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IRRTZQt96oMAX8VwnQt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfDikpESQO7HFMKyp4P-U9tRIcOBHerU8433MSeqPF1qiA&oe=638D0482" 
+                                <Avatar
                                     size={70}
-                                />
+                                >F</Avatar>
                                 <div className = 'inner-friend'>
                                     <span className='name-parter'>Faker</span>
                                     <span className='time-online-ago'>Online 1 hour ago</span>
                                 </div>
                             </FriendStyles>
                             <FriendStyles>
-                                <Avatar src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/314759360_1784100378593353_1317706178968335052_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IRRTZQt96oMAX8VwnQt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfDikpESQO7HFMKyp4P-U9tRIcOBHerU8433MSeqPF1qiA&oe=638D0482" 
+                                <Avatar
                                     size={70}
-                                />
+                                >A</Avatar>
                                 <div className = 'inner-friend'>
-                                    <span className='name-parter'>Faker</span>
+                                    <span className='name-parter'>Aki</span>
                                     <span className='time-online-ago'>Online 1 hour ago</span>
                                 </div>
                             </FriendStyles>
@@ -156,9 +158,9 @@ function Messages() {
                         <Col span={15}>
                             <WrapperMessageStyles>
                                 <HeaderMessage className='header__message'>
-                                    <Avatar src="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/314759360_1784100378593353_1317706178968335052_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IRRTZQt96oMAX8VwnQt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfDikpESQO7HFMKyp4P-U9tRIcOBHerU8433MSeqPF1qiA&oe=638D0482" 
+                                    <Avatar
                                     size={40}
-                                    />
+                                    >F</Avatar>
                                     <div className = 'detail-parter'>
                                         <span className='name-parter-message'>Faker</span>
                                         <span className='time-online-ago-message'>Online 1 hour ago</span>

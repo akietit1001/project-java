@@ -13,7 +13,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import images from '../../assets';
 import userApi from '../../apis/userApi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../redux/reducers/user';
 import { useLocation } from 'react-router-dom';
 import { useUser } from '../../hooks/useUser';
@@ -22,7 +22,9 @@ const cx = classnames.bind(styles);
 
 function Login() {
     const userStore = useUser() || {}
-    const {isLogged = false} = userStore || {};
+    const {isLogged} = userStore || {};
+    // const user = useSelector(state => state.users);
+    // const {isLogged} = user;
     const location = useLocation();
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -51,7 +53,6 @@ function Login() {
                 password: password,
             }
             const res = JSON.parse(localStorage.getItem('user'))
-            console.log(res)
             dispatch(signIn(res))
             // const response = await userApi.signIn(params);
             // const token = response?.accessToken;

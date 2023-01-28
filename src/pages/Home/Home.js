@@ -77,7 +77,8 @@ const ActionCommentStyles = styled.div`
 `
 
 function Home() {
-    const userStore = useSelector(state=>state.users)
+    // const userStore = useSelector(state=>state.users)
+    const userStore = useUser();
     const {lastname, firstname} = userStore || {}
     const fullname = lastname + " " + firstname;
     const [isLove, setIsLove] = useState(false);
@@ -100,7 +101,7 @@ function Home() {
                             />
                             <span className='name-author__post'>{fullname}</span>
                         </HeaderPostStyles>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png" 
+                        <img src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t39.30808-6/325136762_3466186717034440_8499047898026989707_n.jpg?stp=dst-jpg_p843x403&_nc_cat=1&ccb=1-7&_nc_sid=730e14&_nc_ohc=ZUMJJq11y7IAX80Q0tq&_nc_ht=scontent.fsgn3-1.fna&oh=00_AfCHTTP7Mt0AL9FBjmG_OxHFyjO7eph2k1Pdq6B9wFOAhA&oe=63D49C76" 
                         alt="" style={{width: '600px'}} className='image__post'/>
                         <ActionPostStyles className='actions__post'>
                             <span onClick={handleButtonLove}>{isLove ? <HeartFilled style={{color: '#e41e3f'}}/> : <HeartOutlined />}</span>
@@ -141,7 +142,7 @@ function Home() {
                         </ActionPostStyles>
                         <ActionCommentStyles>
                             <Input placeholder='Add comments' className='input__comment' />
-                            <Button className='btn__comment' type='primary' >Post</Button>
+                            <Button className='btn__comment' type='primary'>Post</Button>
                         </ActionCommentStyles>
                     </div>
                 </PostStyles>
