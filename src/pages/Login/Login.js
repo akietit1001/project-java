@@ -21,10 +21,10 @@ import { useUser } from '../../hooks/useUser';
 const cx = classnames.bind(styles);
 
 function Login() {
-    const userStore = useUser() || {}
-    const {isLogged} = userStore || {};
-    // const user = useSelector(state => state.users);
-    // const {isLogged} = user;
+    // const userStore = useUser() || {}
+    // const {isLogged} = userStore || {};
+    const user = useSelector(state => state.users);
+    const {isLogged} = user;
     const location = useLocation();
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -52,12 +52,13 @@ function Login() {
                 username: username,
                 password: password,
             }
-            const res = JSON.parse(localStorage.getItem('user'))
-            dispatch(signIn(res))
-            // const response = await userApi.signIn(params);
-            // const token = response?.accessToken;
-            // localStorage.setItem('accessToken', token);
-            // dispatch(signIn(response));
+            // const res = JSON.parse(localStorage.getItem('user'))
+            // dispatch(signIn(res))
+            const response = await userApi.signIn(params);
+            const token = response?.accessToken;
+            localStorage.setItem('user', JSON.stringify(response));
+            localStorage.setItem('accessToken', token);
+            dispatch(signIn(response));
             navigate(ROUTE.HOME.URL);
         } catch (error) {
             setError(error.message);

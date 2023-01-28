@@ -4,7 +4,6 @@ import {Col, Row, Avatar, Input, Button} from 'antd';
 import { HeartOutlined, HeartFilled, CommentOutlined, ShareAltOutlined  } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useUser } from '../../hooks/useUser';
-import store from '../../redux/store';
 import { useSelector } from 'react-redux';
 
 const SidebarStyles = styled(Col)`
@@ -21,7 +20,7 @@ const ContentStyled = styled(Col)`
 
 const PostStyles = styled(Col)`
     display: flex;
-    flex: 1;
+    flex: none;
     max-width: 100%;
     justify-content: center;
     margin-bottom: 30px;

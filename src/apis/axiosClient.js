@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: process.env.BASE_URL,
+    baseURL: 'https://db18-222-253-162-85.ap.ngrok.io',
     headers: {
         'Content-Type': 'application/json',
         'Accept': '*/*',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
     },
     // paramsSerializer: params => queryString.stringify(params),
 })

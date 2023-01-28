@@ -10,37 +10,93 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { DatePicker, Radio, Checkbox } from 'antd';
 import Button from '@mui/material/Button';
 import images from '../../assets';
+import userApi from '../../apis/userApi';
+const dayjs = require('dayjs')
+
 
 const cx = classnames.bind(styles);
 
 
 function Register() {
     let navigate = useNavigate();
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [occupation, setOccupation] = useState('');
+    const [birthDay, setBirthDay] = useState('');
+    const [gender, setGender] = useState('');
+    const [role, setRole] = useState(['Admin']);
     const [password, setPassword] = useState('');
     const [conformPassword, setConformPassword] = useState('');
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
+    const [error, setError] = useState([]);
+    const roleOptions = [
+        {
+            label: 'Admin',
+            value: 'Admin',
+        },
+        {
+            label: 'User',
+            value: 'User',
+        }
+        
+    ];
     const handleClickShowPassword1 = () => {
     setShowPassword1(!showPassword1);
   };
   const handleClickShowPassword2 = () => {
     setShowPassword2(!showPassword2);
   };
-  const handledSubmit = () =>{
-        // navigate(ROUTE.HOME.URL);
+    const onSubmit = async ()=>{
+    try {
+        const params = {
+            username: userName,
+            email: email,
+            firstname: firstName,
+            lastname: lastName,
+            phonenumber: phone,
+            occupation: occupation,
+            birthday: birthDay,
+            genDer: gender,
+            role: role,
+            address: address,
+            password: password,
+        }
+        if(password === conformPassword) {
+            await userApi.signUp(params);
+        }
+        else{
+            throw new Error("Invalid password");
+        }
+        navigate(ROUTE.LOG_IN.URL);
+    } catch (error) {
+        setError(error.message);
+    }
     }
     return <div className={cx('wrapper')}>
         <div className={cx('inner')}>
             <img className={cx('logo')} src = {images.logo} alt='logo'/>
             <div className={cx('form-register')}>
+
+            <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
+                <InputLabel htmlFor="filled-adornment-username" sx={{fontSize: '14px'}}>Username</InputLabel>
+                <FilledInput
+                    id="filled-adornment-username"
+                    required = {true}
+                    onChange={(e)=>{
+                        setUserName(e.target.value);
+                    }}
+                    sx={{fontSize: '16px'}}
+                />
+            </FormControl>
+
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
                 <InputLabel htmlFor="filled-adornment-email" sx={{fontSize: '14px'}}>Email</InputLabel>
                 <FilledInput
@@ -114,6 +170,34 @@ function Register() {
                 />
             </FormControl>
 
+            <DatePicker 
+                style={{width: '95%', margin: '10px 0'}}
+                placeholder="Select birthday"
+                size='large'
+                onChange={(date, dateString)=>{
+                    setBirthDay(dateString);
+                }}
+            />
+
+            <Radio.Group onChange={(e)=>{
+                setGender(e.target.value)
+            }} value={gender}
+            size='large'
+            style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '40%'}}>
+                    <Radio value={"male"}>Male</Radio>
+                    <Radio value={"female"}>Female</Radio>
+            </Radio.Group>
+
+            <Checkbox.Group onChange={(value)=>{
+                setRole(value);
+            }}
+                options={roleOptions}
+                defaultValue={['Admin']}
+                style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '40%'}}
+            >
+
+            </Checkbox.Group>
+
             <FormControl sx={{ m: 1, width: '35ch'}} variant="filled">
                 <InputLabel htmlFor="filled-adornment-password" sx={{fontSize: '14px'}}>Password</InputLabel>
                 <FilledInput
@@ -169,7 +253,7 @@ function Register() {
                     marginTop: '20px',
                     fontSize: '16px'
                 }}
-                onClick={handledSubmit}
+                onClick={onSubmit}
                 >SIGN UP</Button>
 
                 <span className={cx('options')}>
