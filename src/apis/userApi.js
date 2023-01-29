@@ -4,7 +4,7 @@ const userApi = {
     signIn: async(params) => {
         const url = '/api/auth/signin';
         const response = await axiosClient.post(url, params);
-        if (response.success) {
+        if (response.status === 'ok') {
             return response.data;
         } else {
             throw response;
@@ -20,10 +20,5 @@ const userApi = {
             throw response;
         }
     }
-
-    // get: (id) => {
-    //     const url = `products/${id}`;
-    //     return axiosClient.get(url);
-    // }
 }
 export default userApi;

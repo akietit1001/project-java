@@ -19,6 +19,7 @@ import store from './redux/store';
 import { useUser } from './hooks/useUser';
 import { useLocation } from 'react-router-dom';
 import { IntercomProvider, useIntercom } from "react-use-intercom";
+import Create from './pages/Create/Create';
 
 function PrivateRoute({ children }) {
   const userStore = useUser() || {};
@@ -78,6 +79,12 @@ function App() {
                       path={ROUTE.NOTIFY.URL}
                       element={<PrivateRoute>
                         <Notification />
+                      </PrivateRoute>}
+                    />
+                    <Route
+                      path={ROUTE.CREATE.URL}
+                      element={<PrivateRoute>
+                        <Create />
                       </PrivateRoute>}
                     />
                     <Route

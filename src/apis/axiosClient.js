@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: 'https://db18-222-253-162-85.ap.ngrok.io',
+    baseURL: 'https://bdd0-222-253-162-85.ap.ngrok.io',
     headers: {
         'Content-Type': 'application/json',
         'Accept': '*/*',

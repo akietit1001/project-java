@@ -41,6 +41,12 @@ export const ROUTE = {
         NAME: "NOTIFY",
         HIDE: false,
     },
+    CREATE: {
+        URL: "/create",
+        ICON: "create",
+        NAME: "CREATE",
+        HIDE: false,
+    },
     PROFILE: {
         URL: "/profile",
         ICON: "profile",
